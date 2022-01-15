@@ -89,10 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
-  Future<void> _getUrlWeatherLocation() async {
-    if (!_serviceEnabled)
+  void _getUrlWeatherLocation() {
+    if (!_serviceEnabled) {
       debugPrint('Location service not enabled');
-    else if (_permissionStatus == PermissionStatus.denied) {
+    } else if (_permissionStatus == PermissionStatus.denied) {
       debugPrint('Location service not enabled');
     } else if (_locationData != null) {
       _weatherInfoUrl =
@@ -107,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _getUrlWeatherLocation();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -125,12 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
             StreamBuilder<LocationData>(
                 stream: location.onLocationChanged,
                 builder: (context, snapshot) {
-                  return Text(
-                      'https://api.weatherapi.com/v1/forecast.json?key=a62d114fc8f54d9dbc8153818210612&q=' +
-                          _locationData!.latitude.toString() +
-                          "," +
-                          _locationData!.longitude.toString() +
-                          '&days=3&aqi=no&alerts=yes');
+                  return Text(_weatherInfoUrl!);
                 }),
         ],
       )),
