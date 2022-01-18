@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +20,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      initialRoute: MyHomePage.routeName,
+      routes: {MyHomePage.routeName: (_) => const MyHomePage(title: "WEATHER")},
       home: const MyHomePage(title: 'Weather App '),
     );
   }
@@ -24,15 +30,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
+  static const String routeName = 'homescreen';
   final String title;
 
   @override
@@ -40,26 +38,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<WeatherInfo>? _weatherInfo;
+  WeatherInfo? _weatherInfo;
 
   // Location
   Location location = Location();
-  bool _serviceEnabled = false;
+  bool _serviceEnabled = false, _fetchingData = false;
   PermissionStatus _permissionStatus = PermissionStatus.denied;
   LocationData? _locationData;
   String? _weatherInfoUrl;
-  /*static const String _weatherInfoUrl =
-      'https://api.weatherapi.com/v1/forecast.json?key=a62d114fc8f54d9dbc8153818210612&q=' +
-          _locationData!.latitude +
-          "," +
-          _locationData!.longitude +
-          '&days=3&aqi=no&alerts=yes';*/
 
   @override
   void initState() {
     super.initState();
     _fetchLocation();
-    _getUrlWeatherLocation();
   }
 
   //Future<void> _fetchWeatherInfo() async {
@@ -82,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     await _getCoordinates();
+    await _getUrlWeatherLocation();
   }
 
   Future<void> _getCoordinates() async {
@@ -89,25 +81,36 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
-  void _getUrlWeatherLocation() {
-    if (!_serviceEnabled) {
-      debugPrint('Location service not enabled');
-    } else if (_permissionStatus == PermissionStatus.denied) {
-      debugPrint('Location service not enabled');
-    } else if (_locationData != null) {
+  Future<void> _getUrlWeatherLocation() async {
+    if (_locationData != null) {
       _weatherInfoUrl =
           'https://api.weatherapi.com/v1/forecast.json?key=a62d114fc8f54d9dbc8153818210612&q=' +
               _locationData!.latitude.toString() +
               "," +
               _locationData!.longitude.toString() +
               '&days=3&aqi=no&alerts=yes';
+
+      try {
+        setState(() => _fetchingData = true);
+        http.Response response = await http.get(Uri.parse(_weatherInfoUrl!));
+
+        if (response.statusCode == HttpStatus.ok) {
+          final Map<String, dynamic> decodedData = jsonDecode(response.body);
+
+          setState(() => _weatherInfo = WeatherInfo.fromJson(decodedData));
+        }
+      } catch (ex) {
+        debugPrint('Something went wrong: $ex');
+      } finally {
+        debugPrint(_weatherInfo.toString());
+        setState(() => _fetchingData = false);
+      }
     }
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    _getUrlWeatherLocation();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -116,18 +119,23 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (!_serviceEnabled)
-            const Text('Location service not enabled')
+          if (!_serviceEnabled || _fetchingData)
+            const CircularProgressIndicator()
           else if (_permissionStatus == PermissionStatus.denied)
             const Text("Location service not allowed")
-          else if (_locationData == null)
-            const CircularProgressIndicator()
-          else
-            StreamBuilder<LocationData>(
-                stream: location.onLocationChanged,
-                builder: (context, snapshot) {
-                  return Text(_weatherInfoUrl!);
-                }),
+          else if (_weatherInfo != null)
+            Expanded(
+              child: ListView.separated(
+                  itemBuilder: (context, index) => ListTile(
+                        title: Text('Location #${index + 1}'),
+                        subtitle: Text(_weatherInfo?.location["name"]),
+                        onTap: () => debugPrint("Carregou em $index"),
+                      ),
+                  separatorBuilder: (_, __) => const Divider(
+                        thickness: 2,
+                      ),
+                  itemCount: 3),
+            )
         ],
       )),
     );
@@ -135,7 +143,14 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class WeatherInfo {
-  //WeatherInfo.fromJson(Map<String, dynamic> json):
+  WeatherInfo.fromJson(Map<String, dynamic> json)
+      : location = json['location'],
+        forecast = json['forecast'],
+        current = json['current'],
+        alerts = json['alerts'];
 
-  // final String location;
+  final Map location;
+  final Map forecast;
+  final Map current;
+  final Map alerts;
 }
