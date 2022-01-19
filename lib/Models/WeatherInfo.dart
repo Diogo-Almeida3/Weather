@@ -10,3 +10,4 @@ class WeatherInfo {
   final Map current;
   final Map alerts;
 }
+

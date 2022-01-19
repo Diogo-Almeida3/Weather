@@ -1,6 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:weather/Views/weatherMainView.dart';
+
+import 'generated/l10n.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,13 +15,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       title: 'Weather App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       initialRoute: MyHomePage.routeName,
       routes: {MyHomePage.routeName: (_) => const MyHomePage(title: "WEATHER")},
-      home: const MyHomePage(title: 'Weather App '),
+      home: const MyHomePage(title: 'Weather App'),
     );
   }
 }
@@ -35,8 +45,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,5 +54,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-

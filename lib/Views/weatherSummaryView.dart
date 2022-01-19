@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherInfo.dart';
 
@@ -32,7 +31,8 @@ class WeatherSummary extends StatelessWidget {
               )
             ],
           ),
-          Padding(padding: const EdgeInsets.only(top:5),
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
             child: Image.network(
                 "https:" + weatherInfo?.current["condition"]["icon"]),
           )
