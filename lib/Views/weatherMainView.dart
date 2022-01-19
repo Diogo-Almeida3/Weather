@@ -95,6 +95,19 @@ class _WeatherMainViewState extends State<WeatherMainView> {
     }
   }
 
+  List<Widget> generateDays() {
+    List<Widget> _days = List<Widget>.empty(growable: true);
+    for (int i = 0; i < 3; i++) {
+      _days.add(
+        DaysSummaryView(
+          weatherInfo: _weatherInfo,
+          day: i,
+        ),
+      );
+    }
+    return _days;
+  }
+
   Widget MainWidget(BuildContext context) {
     return Container(
       child: ListView(
@@ -107,11 +120,8 @@ class _WeatherMainViewState extends State<WeatherMainView> {
               const SizedBox(height: 20),
               WeatherDescriptionView(weatherInfo: _weatherInfo),
               const SizedBox(height: 140),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DaysSummaryView(weatherInfo: _weatherInfo),
-                ],
+              Wrap(
+                children: generateDays(),
               ),
             ],
           )

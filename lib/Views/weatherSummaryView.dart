@@ -14,7 +14,7 @@ class WeatherSummary extends StatelessWidget {
           Column(
             children: [
               Text(
-                weatherInfo?.location["region"],
+                "${weatherInfo?.current["temp_c"]}",
                 style: const TextStyle(
                   fontSize: 40,
                   color: Colors.white,
@@ -22,7 +22,7 @@ class WeatherSummary extends StatelessWidget {
                 ),
               ),
               Text(
-                "${weatherInfo?.current["temp_c"]}",
+                "Average temperature ${weatherInfo?.forecast["forecastday"][0]["day"]["avgtemp_c"]}",
                 style: const TextStyle(
                   fontSize: 18,
                   color: Colors.white,
