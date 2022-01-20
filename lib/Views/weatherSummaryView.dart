@@ -17,7 +17,7 @@ class WeatherSummary extends StatelessWidget {
                 "https:" + weatherInfo?.current["condition"]["icon"]),
           ),
           Text(
-            "${weatherInfo?.current["temp_c"]}",
+            "${weatherInfo?.current["temp_c"]} \u2103",
             style: const TextStyle(
               fontSize: 40,
               color: Colors.white,

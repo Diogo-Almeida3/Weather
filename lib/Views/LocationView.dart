@@ -10,7 +10,7 @@ class LocationView extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Text(weatherInfo?.location["region"],
+          Text(weatherInfo?.location["name"],
               style: const TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w300,

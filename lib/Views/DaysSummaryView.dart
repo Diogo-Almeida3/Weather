@@ -28,7 +28,7 @@ class DaysSummaryView extends StatelessWidget {
                 color: Colors.white,
                 fontWeight: FontWeight.w500)),
         Padding(
-            padding: const EdgeInsets.only(left: 5),
+            padding: const EdgeInsets.only(),
             child: Container(
                 child: Padding(
               padding: const EdgeInsets.only(top: 5),

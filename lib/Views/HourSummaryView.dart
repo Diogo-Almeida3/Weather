@@ -33,10 +33,9 @@ class HourSummaryView extends StatelessWidget {
                       ["condition"]["icon"]),
             ))),
         Text(
-            "${weatherInfo?.forecast["forecastday"][0]["hour"][hour]["temp_c"]}",
+            "${weatherInfo?.forecast["forecastday"][0]["hour"][hour]["temp_c"]}\u2103",
             style: const TextStyle(
-              fontSize: 15
-              ,
+              fontSize: 15,
               color: Colors.white,
               fontWeight: FontWeight.w300,
             )),
