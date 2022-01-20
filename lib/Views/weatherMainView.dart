@@ -41,7 +41,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
   /* Caso já exista um */
   _readWeatherInfo() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    
+
     String? json = preferences.getString("Weather");
 
     if (json == null) {
@@ -154,6 +154,24 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         Wrap(
           children: generateDays(),
         ),
+        Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.access_time, color: Colors.black45, size: 15),
+              const SizedBox(width: 10),
+              Text(
+                "Last Updated on ${_weatherInfo?.location["localtime"]}",
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black45,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
