@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:weather/Models/WeatherInfo.dart';
 import 'package:weather/Models/background.dart';
 import 'package:weather/Views/DaysSummaryView.dart';
+import 'package:weather/Views/HourSummaryView.dart';
 import 'package:weather/Views/LocationView.dart';
 import 'package:weather/Views/WeatherDescriptionView.dart';
 import 'package:weather/Views/weatherSummaryView.dart';
@@ -108,25 +109,39 @@ class _WeatherMainViewState extends State<WeatherMainView> {
     return _days;
   }
 
+  List<Widget> generateHours() {
+    List<Widget> _hours = List<Widget>.empty(growable: true);
+    for (int i = 0; i < 24; i++) {
+      _hours.add(
+        HourSummaryView(
+          weatherInfo: _weatherInfo,
+          hour: i,
+        ),
+      );
+    }
+    return _hours;
+  }
+
   Widget MainWidget(BuildContext context) {
-    return Container(
-      child: ListView(
-        children: <Widget>[
-          Column(
-            children: [
-              LocationView(weatherInfo: _weatherInfo),
-              const SizedBox(height: 50),
-              WeatherSummary(weatherInfo: _weatherInfo),
-              const SizedBox(height: 20),
-              WeatherDescriptionView(weatherInfo: _weatherInfo),
-              const SizedBox(height: 140),
-              Wrap(
-                children: generateDays(),
-              ),
-            ],
-          )
-        ],
-      ),
+    return Column(
+      children: [
+        const SizedBox(height: 15),
+        LocationView(weatherInfo: _weatherInfo),
+        const SizedBox(height: 5),
+        WeatherSummary(weatherInfo: _weatherInfo),
+        const SizedBox(height: 5),
+        WeatherDescriptionView(weatherInfo: _weatherInfo),
+        Expanded(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            children: generateHours(),
+          ),
+        ),
+        Wrap(
+          children: generateDays(),
+        ),
+      ],
     );
   }
 
@@ -179,6 +194,22 @@ class _WeatherMainViewState extends State<WeatherMainView> {
       },
     );
 
+    const MaterialColor yellow = MaterialColor(
+      0xFFFFFFFF,
+      <int, Color>{
+        50: Color(0xFFF28D02),
+        100: Color(0xFFF28D02),
+        200: Color(0xFFF28D02),
+        300: Color(0xFFF28D02),
+        400: Color(0xFFF28D02),
+        500: Color(0xFFF28D02),
+        600: Color(0xFFF28D02),
+        700: Color(0xFFF28D02),
+        800: Color(0xFFF28D02),
+        900: Color(0xFFF28D02),
+      },
+    );
+
     Background container = Background(color: white, child: child);
 
     if (_weatherInfo == null) {
@@ -188,7 +219,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         switch (_weatherInfo?.forecast["forecastday"][0]["day"]["condition"]
             ["code"]) {
           case 1000:
-            container = Background(color: Colors.yellow, child: child);
+            container = Background(color: yellow, child: child);
             break;
           case 1003:
           case 1006:

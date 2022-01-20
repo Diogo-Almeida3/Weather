@@ -8,33 +8,29 @@ class WeatherSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Column(
-            children: [
-              Text(
-                "${weatherInfo?.current["temp_c"]}",
-                style: const TextStyle(
-                  fontSize: 40,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              Text(
-                "Average temperature ${weatherInfo?.forecast["forecastday"][0]["day"]["avgtemp_c"]}",
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
-              )
-            ],
-          ),
           Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Image.network(
                 "https:" + weatherInfo?.current["condition"]["icon"]),
+          ),
+          Text(
+            "${weatherInfo?.current["temp_c"]}",
+            style: const TextStyle(
+              fontSize: 40,
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+          Text(
+            "Average temperature ${weatherInfo?.forecast["forecastday"][0]["day"]["avgtemp_c"]}",
+            style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
+            ),
           )
         ],
       ),

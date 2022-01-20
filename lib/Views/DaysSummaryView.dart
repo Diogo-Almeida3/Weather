@@ -36,7 +36,7 @@ class DaysSummaryView extends StatelessWidget {
                   weatherInfo?.forecast["forecastday"][day]["day"]["condition"]
                       ["icon"]),
             ))),
-        Text("${maxtemp_c.round()}\u2103 /${mintemp_c.round()}\u2103",
+        Text("${maxtemp_c.round()}\u2103 / ${mintemp_c.round()}\u2103",
             style: const TextStyle(
                 fontSize: 20,
                 color: Colors.white,
