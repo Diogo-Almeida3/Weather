@@ -11,6 +11,7 @@ import 'package:weather/Views/HourSummaryView.dart';
 import 'package:weather/Views/LocationView.dart';
 import 'package:weather/Views/WeatherDescriptionView.dart';
 import 'package:weather/Views/weatherSummaryView.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WeatherMainView extends StatefulWidget {
   const WeatherMainView({Key? key}) : super(key: key);
@@ -32,7 +33,25 @@ class _WeatherMainViewState extends State<WeatherMainView> {
   @override
   void initState() {
     super.initState();
-    _fetchLocation();
+    //todo vamos passar a ter aqui um le qualquer coisa das shared preferences
+    _readWeatherInfo();
+    //_fetchLocation();
+  }
+
+  /* Caso já exista um */
+  _readWeatherInfo() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    
+    String? json = preferences.getString("Weather");
+
+    if (json == null) {
+      setState(() {});
+    } else {
+      final Map<String, dynamic> decodedData = jsonDecode(json);
+      setState(() {
+        _weatherInfo = WeatherInfo.fromJson(decodedData);
+      });
+    }
   }
 
   Future<void> _fetchLocation() async {
@@ -71,7 +90,13 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         http.Response response = await http.get(Uri.parse(_weatherInfoUrl!));
 
         if (response.statusCode == HttpStatus.ok) {
+          SharedPreferences preferences = await SharedPreferences.getInstance();
+
           final Map<String, dynamic> decodedData = jsonDecode(response.body);
+
+          String sharedPreferencesData =
+              jsonEncode(WeatherInfo.fromJson(decodedData));
+          preferences.setString("Weather", sharedPreferencesData);
 
           setState(() => _weatherInfo = WeatherInfo.fromJson(decodedData));
         }
@@ -88,12 +113,49 @@ class _WeatherMainViewState extends State<WeatherMainView> {
   @override
   Widget build(BuildContext context) {
     if (_weatherInfo == null) {
-      return const CircularProgressIndicator();
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: () async {
+                    await _fetchLocation();
+                    setState(() {});
+                  },
+                  child: const Text("Update Weather"))
+            ],
+          ),
+        ),
+      );
     } else {
       return Scaffold(
         body: _backgroundContainer(MainWidget(context)),
       );
     }
+  }
+
+  Widget MainWidget(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 15),
+        LocationView(weatherInfo: _weatherInfo),
+        const SizedBox(height: 5),
+        WeatherSummary(weatherInfo: _weatherInfo),
+        const SizedBox(height: 5),
+        WeatherDescriptionView(weatherInfo: _weatherInfo),
+        Expanded(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            children: generateHours(),
+          ),
+        ),
+        Wrap(
+          children: generateDays(),
+        ),
+      ],
+    );
   }
 
   List<Widget> generateDays() {
@@ -120,29 +182,6 @@ class _WeatherMainViewState extends State<WeatherMainView> {
       );
     }
     return _hours;
-  }
-
-  Widget MainWidget(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 15),
-        LocationView(weatherInfo: _weatherInfo),
-        const SizedBox(height: 5),
-        WeatherSummary(weatherInfo: _weatherInfo),
-        const SizedBox(height: 5),
-        WeatherDescriptionView(weatherInfo: _weatherInfo),
-        Expanded(
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            children: generateHours(),
-          ),
-        ),
-        Wrap(
-          children: generateDays(),
-        ),
-      ],
-    );
   }
 
   Background _backgroundContainer(Widget child) {
