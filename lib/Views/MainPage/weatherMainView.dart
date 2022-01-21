@@ -233,19 +233,19 @@ class _WeatherMainViewState extends State<WeatherMainView> {
       },
     );
 
-    const MaterialColor yellow = MaterialColor(
+    const MaterialColor blueClear = MaterialColor(
       0xFFFFFFFF,
       <int, Color>{
-        50: Color(0xFFF28D02),
-        100: Color(0xFFF28D02),
-        200: Color(0xFFF28D02),
-        300: Color(0xFFF28D02),
-        400: Color(0xFFF28D02),
-        500: Color(0xFFF28D02),
-        600: Color(0xFFF28D02),
-        700: Color(0xFFF28D02),
-        800: Color(0xFFF28D02),
-        900: Color(0xFFF28D02),
+        50: Color(0xFF42A5F5),
+        100: Color(0xFF64B5F6),
+        200: Color(0xFF64B5F6),
+        300: Color(0xFF64B5F6),
+        400: Color(0xFF90CAF9),
+        500: Color(0xFF90CAF9),
+        600: Color(0xFF90CAF9),
+        700: Color(0xFFBBDEFB),
+        800: Color(0xFFBBDEFB),
+        900: Color(0xFFBBDEFB),
       },
     );
 
@@ -258,7 +258,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         switch (_weatherInfo?.forecast["forecastday"][0]["day"]["condition"]
             ["code"]) {
           case 1000:
-            container = Background(color: yellow, child: child);
+            container = Background(color: blueClear, child: child);
             break;
           case 1003:
           case 1006:

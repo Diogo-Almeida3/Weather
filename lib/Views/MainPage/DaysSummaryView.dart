@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherArguments.dart';
 import 'package:weather/Models/WeatherInfo.dart';
 import 'package:intl/intl.dart';
-import 'package:weather/Views/SecondaryView/WeatherDayMainView.dart';
+import 'package:weather/Views/SecondaryView/MainDayView.dart';
 
 class DaysSummaryView extends StatelessWidget {
   final WeatherInfo? weatherInfo;
   final int? day;
 
-  const DaysSummaryView({Key? key, required this.weatherInfo, required this.day})
+  const DaysSummaryView(
+      {Key? key, required this.weatherInfo, required this.day})
       : super(key: key);
 
   @override
@@ -24,8 +25,10 @@ class DaysSummaryView extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
         child: InkWell(
-          onTap: () => //FlutterError (Could not find a generator for route RouteSettings("WeatherDayView", null) in the _WidgetsAppState
-              Navigator.pushNamed(context, WeatherDayMainView.routeName,arguments: WeatherArguments(weatherInfo!, day!)),
+          onTap:
+              () => //FlutterError (Could not find a generator for route RouteSettings("WeatherDayView", null) in the _WidgetsAppState
+                  Navigator.pushNamed(context, MainDayView.routeName,
+                      arguments: WeatherArguments(weatherInfo!, day!)),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(dayOfWeek ?? '',
@@ -38,8 +41,8 @@ class DaysSummaryView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: Image.network("https:" +
-                  weatherInfo?.forecast["forecastday"][day]["day"]
-                      ["condition"]["icon"]),
+                      weatherInfo?.forecast["forecastday"][day]["day"]
+                          ["condition"]["icon"]),
                 )),
             Text("${maxtemp_c.round()}\u2103 / ${mintemp_c.round()}\u2103",
                 style: const TextStyle(

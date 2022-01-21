@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:weather/Views/MainPage/weatherMainView.dart';
-import 'package:weather/Views/SecondaryView/WeatherDayMainView.dart';
+import 'package:weather/Views/SecondaryView/MainDayView.dart';
 
 import 'generated/l10n.dart';
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       initialRoute: MyHomePage.routeName,
       routes: {
         MyHomePage.routeName: (_) => const MyHomePage(title: "WEATHER"),
-        WeatherDayMainView.routeName: (_) => const WeatherDayMainView(),
+        MainDayView.routeName: (_) => const MainDayView(),
       },
     );
   }
