@@ -6,11 +6,12 @@ import 'dart:io';
 
 import 'package:weather/Models/WeatherInfo.dart';
 import 'package:weather/Models/background.dart';
-import 'package:weather/Views/DaysSummaryView.dart';
-import 'package:weather/Views/HourSummaryView.dart';
+import 'package:weather/Views/MainPage/LastUpdatedView.dart';
+import 'package:weather/Views/MainPage/DaysSummaryView.dart';
+import 'package:weather/Views/MainPage/HourSummaryView.dart';
 import 'package:weather/Views/LocationView.dart';
-import 'package:weather/Views/WeatherDescriptionView.dart';
-import 'package:weather/Views/weatherSummaryView.dart';
+import 'package:weather/Views/MainPage/WeatherDescriptionView.dart';
+import 'package:weather/Views/MainPage/weatherSummaryView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WeatherMainView extends StatefulWidget {
@@ -25,7 +26,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
 
   // Location
   Location location = Location();
-  bool _serviceEnabled = false, _fetchingData = false;
+  bool _serviceEnabled = false;
   PermissionStatus _permissionStatus = PermissionStatus.denied;
   LocationData? _locationData;
   String? _weatherInfoUrl;
@@ -86,7 +87,6 @@ class _WeatherMainViewState extends State<WeatherMainView> {
               '&days=3&aqi=no&alerts=yes';
 
       try {
-        setState(() => _fetchingData = true);
         http.Response response = await http.get(Uri.parse(_weatherInfoUrl!));
 
         if (response.statusCode == HttpStatus.ok) {
@@ -104,7 +104,6 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         debugPrint('Something went wrong: $ex');
       } finally {
         debugPrint(_weatherInfo.toString());
-        setState(() => _fetchingData = false);
       }
     }
     setState(() {});
@@ -154,24 +153,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         Wrap(
           children: generateDays(),
         ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.access_time, color: Colors.black45, size: 15),
-              const SizedBox(width: 10),
-              Text(
-                "Last Updated on ${_weatherInfo?.location["localtime"]}",
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black45,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-            ],
-          ),
-        )
+        LastUpdatedView(weatherInfo: _weatherInfo)
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:weather/Views/weatherMainView.dart';
+import 'package:weather/Views/MainPage/weatherMainView.dart';
+import 'package:weather/Views/SecondaryView/WeatherDayMainView.dart';
 
 import 'generated/l10n.dart';
 
@@ -28,8 +29,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: MyHomePage.routeName,
-      routes: {MyHomePage.routeName: (_) => const MyHomePage(title: "WEATHER")},
-      home: const MyHomePage(title: 'Weather App'),
+      routes: {
+        MyHomePage.routeName: (_) => const MyHomePage(title: "WEATHER"),
+        WeatherDayMainView.routeName: (_) => const WeatherDayMainView(),
+      },
     );
   }
 }
@@ -47,11 +50,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: MaterialApp(
-      title: "Weather App",
-      home: WeatherMainView(),
-      debugShowCheckedModeBanner: false,
-    ));
+    return const SafeArea(child: WeatherMainView());
   }
 }

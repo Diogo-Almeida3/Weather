@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherInfo.dart';
 
@@ -7,7 +6,7 @@ import 'package:intl/intl.dart';
 class HourSummaryView extends StatelessWidget {
   final WeatherInfo? weatherInfo;
   final int? hour;
-  HourSummaryView({Key? key, required this.weatherInfo, required this.hour})
+  const HourSummaryView({Key? key, required this.weatherInfo, required this.hour})
       : super(key: key);
 
   @override
@@ -25,13 +24,12 @@ class HourSummaryView extends StatelessWidget {
                 fontWeight: FontWeight.w500)),
         Padding(
             padding: const EdgeInsets.only(left: 5),
-            child: Container(
-                child: Padding(
+            child: Padding(
               padding: const EdgeInsets.only(top: 5),
               child: Image.network("https:" +
-                  weatherInfo?.forecast["forecastday"][0]["hour"][hour]
-                      ["condition"]["icon"]),
-            ))),
+              weatherInfo?.forecast["forecastday"][0]["hour"][hour]
+                  ["condition"]["icon"]),
+            )),
         Text(
             "${weatherInfo?.forecast["forecastday"][0]["hour"][hour]["temp_c"]}\u2103",
             style: const TextStyle(
