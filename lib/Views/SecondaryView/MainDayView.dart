@@ -10,6 +10,8 @@ import 'package:weather/Views/SecondaryView/PrecipitationView.dart';
 import 'package:weather/Views/SecondaryView/TemperatureView.dart';
 import 'package:weather/Views/SecondaryView/WindView.dart';
 
+import 'package:intl/intl.dart';
+
 class MainDayView extends StatefulWidget {
   const MainDayView({Key? key}) : super(key: key);
   static const String routeName = "WeatherDayView";
@@ -48,6 +50,9 @@ class _MainDayView extends State<MainDayView> {
   );
 
   Widget MainWidget(BuildContext context) {
+    final dayOfWeek = toBeginningOfSentenceCase(DateFormat('EEEE').format(
+        DateTime.tryParse(arguments.weatherInfo.forecast["forecastday"]
+            [arguments.day]["date"])!));
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width * 0.425;
     return Column(
@@ -56,9 +61,9 @@ class _MainDayView extends State<MainDayView> {
         LocationView(weatherInfo: arguments.weatherInfo),
         SizedBox(height: height * 0.025),
         Text(
-            "${arguments.weatherInfo.forecast["forecastday"][arguments.day]["date"]}",
+            "${dayOfWeek}, ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["date"]}",
             style: const TextStyle(
-                fontSize: 26,
+                fontSize: 24,
                 color: Colors.white,
                 fontWeight: FontWeight.w500)),
         Expanded(

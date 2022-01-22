@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:weather/Models/WeatherInfo.dart';
-import 'package:weather/Models/background.dart';
 import 'package:weather/Views/MainPage/LastUpdatedView.dart';
 import 'package:weather/Views/MainPage/DaysSummaryView.dart';
 import 'package:weather/Views/MainPage/HourSummaryView.dart';

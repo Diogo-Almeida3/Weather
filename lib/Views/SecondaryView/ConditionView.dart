@@ -30,9 +30,11 @@ class ConditionView extends StatelessWidget {
                 fontSize: 16,
                 color: Colors.white,
                 fontWeight: FontWeight.w500)),
-        Image.network("https:" +
-            arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]
-                ["condition"]["icon"]),
+        Container(
+          child: Image.network("https:" +
+              arguments.weatherInfo.forecast["forecastday"][arguments.day]
+                  ["day"]["condition"]["icon"]),
+        )
       ],
     );
   }
