@@ -7,7 +7,9 @@ class ConditionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -19,29 +21,18 @@ class ConditionView extends StatelessWidget {
                     fontWeight: FontWeight.w500))
           ],
         ),
-        Column(
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.device_thermostat,
-                    color: Colors.white, size: 20),
-                Text(
-                    "${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["condition"]["text"]}",
-                    style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500)),
-              ],
-            ),
-            Row(
-              children: [
-                Image.network("https:" +
-                    arguments.weatherInfo.forecast["forecastday"][arguments.day]
-                        ["day"]["condition"]["icon"]),
-              ],
-            ),
-          ],
+        SizedBox(
+          height: height * 0.0175,
         ),
+        Text(
+            "${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["condition"]["text"]}",
+            style: const TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.w500)),
+        Image.network("https:" +
+            arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]
+                ["condition"]["icon"]),
       ],
     );
   }

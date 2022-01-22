@@ -48,13 +48,13 @@ class _MainDayView extends State<MainDayView> {
   );
 
   Widget MainWidget(BuildContext context) {
-    double height = MediaQuery.of(context).size.height * 0.2;
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width * 0.425;
     return Column(
       children: [
-        const SizedBox(height: 15),
+        SizedBox(height: height * 0.025),
         LocationView(weatherInfo: arguments.weatherInfo),
-        const SizedBox(height: 15),
+        SizedBox(height: height * 0.025),
         Text(
             "${arguments.weatherInfo.forecast["forecastday"][arguments.day]["date"]}",
             style: const TextStyle(
@@ -68,38 +68,38 @@ class _MainDayView extends State<MainDayView> {
             children: generateHours(),
           ),
         ),
-        const SizedBox(height: 15),
+        SizedBox(height: height * 0.025),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             GlassSquare(
                 width: width,
-                height: height,
+                height: height * 0.2,
                 child: TemperatureView(
                   arguments: arguments,
                 )),
             GlassSquare(
               width: width,
-              height: height,
+              height: height * 0.2,
               child: ConditionView(
                 arguments: arguments,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 15),
+        SizedBox(height: height * 0.025),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             GlassSquare(
                 width: width,
-                height: height,
+                height: height * 0.2,
                 child: PrecipiationView(
                   arguments: arguments,
                 )),
             GlassSquare(
                 width: width,
-                height: height,
+                height: height * 0.2,
                 child: WindView(
                   arguments: arguments,
                 )),

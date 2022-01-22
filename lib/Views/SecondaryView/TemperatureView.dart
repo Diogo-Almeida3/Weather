@@ -8,7 +8,9 @@ class TemperatureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -20,12 +22,14 @@ class TemperatureView extends StatelessWidget {
                     fontWeight: FontWeight.w500))
           ],
         ),
+        SizedBox(
+          height: height * 0.0175,
+        ),
         Column(
           children: [
             Row(
               children: [
-                const Icon(Icons.arrow_circle_up,
-                    color: Colors.white, size: 20),
+                const Icon(Icons.north_outlined, color: Colors.white, size: 20),
                 Text(
                     "Máxima: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["maxtemp_c"]}\u2103 ",
                     style: const TextStyle(
@@ -34,10 +38,12 @@ class TemperatureView extends StatelessWidget {
                         fontWeight: FontWeight.w500)),
               ],
             ),
+            SizedBox(
+              height: height * 0.01,
+            ),
             Row(
               children: [
-                const Icon(Icons.arrow_circle_down,
-                    color: Colors.white, size: 20),
+                const Icon(Icons.south_outlined, color: Colors.white, size: 20),
                 Text(
                     "Minima: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["mintemp_c"]}\u2103 ",
                     style: const TextStyle(
@@ -45,6 +51,9 @@ class TemperatureView extends StatelessWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.w500)),
               ],
+            ),
+            SizedBox(
+              height: height * 0.01,
             ),
             Row(
               children: [

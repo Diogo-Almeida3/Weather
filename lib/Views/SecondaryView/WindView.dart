@@ -7,25 +7,28 @@ class WindView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text("Vento",
+            Text("Outros",
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.w500))
           ],
         ),
+        SizedBox(
+          height: height * 0.0175,
+        ),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               children: [
-                const Icon(Icons.device_thermostat,
-                    color: Colors.white, size: 20),
+                const Icon(Icons.air_outlined, color: Colors.white, size: 20),
                 Text(
                     "Vel: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["avgvis_km"]} km/h ",
                     style: const TextStyle(
@@ -34,9 +37,12 @@ class WindView extends StatelessWidget {
                         fontWeight: FontWeight.w500)),
               ],
             ),
+            SizedBox(
+              height: height * 0.01,
+            ),
             Row(
               children: [
-                const Icon(Icons.device_thermostat,
+                const Icon(Icons.light_mode_outlined,
                     color: Colors.white, size: 20),
                 Text(
                     "Ind. UV: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["uv"]} ",
