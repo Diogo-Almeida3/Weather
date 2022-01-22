@@ -26,10 +26,8 @@ class DaysSummaryView extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
         child: InkWell(
-          onTap:
-              () => //FlutterError (Could not find a generator for route RouteSettings("WeatherDayView", null) in the _WidgetsAppState
-                  Navigator.pushNamed(context, MainDayView.routeName,
-                      arguments: WeatherArguments(weatherInfo!, day!)),
+          onTap: () => Navigator.pushNamed(context, MainDayView.routeName,
+              arguments: WeatherArguments(weatherInfo!, day!)),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(dayOfWeek ?? '',

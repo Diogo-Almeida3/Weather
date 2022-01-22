@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather/Models/GlassSquare.dart';
 import 'package:weather/Models/WeatherArguments.dart';
 import 'package:weather/generated/l10n.dart';
 

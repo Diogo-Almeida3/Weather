@@ -1,13 +1,11 @@
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:weather/Models/Background.dart';
 import 'package:weather/Models/BackgroundContainer.dart';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:weather/Models/WeatherInfo.dart';
-import 'package:weather/Models/background.dart';
 import 'package:weather/Views/MainPage/LastUpdatedView.dart';
 import 'package:weather/Views/MainPage/DaysSummaryView.dart';
 import 'package:weather/Views/MainPage/HourSummaryView.dart';
@@ -38,12 +36,9 @@ class _WeatherMainViewState extends State<WeatherMainView> {
   @override
   void initState() {
     super.initState();
-    //todo vamos passar a ter aqui um le qualquer coisa das shared preferences
     _readWeatherInfo();
-    //_fetchLocation();
   }
 
-  /* Caso já exista um */
   _readWeatherInfo() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
