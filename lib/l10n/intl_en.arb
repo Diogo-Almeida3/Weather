@@ -1,4 +1,26 @@
 {
-    "@locale": "en"
-
+  "@locale": "en",
+  "condition": "Condition",
+  "precipitation": "Precipitation",
+  "others": "Others",
+  "humidity": "Humidity: {humidity}%",
+  "prob_rain": "Prob. Rain: {prob_rain}%",
+  "prob_snow": "Prob. Snow: {prob_snow}%",
+  "daily_temperature": "{daily_temperature}℃",
+  "humidity_percentage": "{humidity_percentage}%",
+  "day_date": "{dayOfWeek}, {date}",
+  "temperature": "Temperature",
+  "max_temperature": "Maximum: {max_temperature}℃ ",
+  "min_temperature": "Minimum: {min_temperature}℃",
+  "medium_temperature": "Medium: {medium_temperature}℃",
+  "wind_speed": "Vel: {wind_speed} km/h ",
+  "ind_uv": "Ind. UV: {uv} ",
+  "name_region": "{name},{region}",
+  "lat_lon": "{lat}, {lon}",
+  "max_min_temp": "{max_temp}℃ / {min_temp}℃",
+  "hour_temperature": "{hour_temperature}℃",
+  "last_Updated": "Last Updated on {last_Updated}",
+  "condition_description": "{condition_description}",
+  "average_temperature": "Average temperature {average_temperature}",
+  "current_temperature": "{current_temperature}\u2103"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherInfo.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:weather/generated/l10n.dart';
 
 class LocationView extends StatelessWidget {
   final WeatherInfo? weatherInfo;
@@ -14,7 +15,8 @@ class LocationView extends StatelessWidget {
           Container(
             margin: new EdgeInsets.only(right: 15, left: 15),
             child: AutoSizeText(
-                "${weatherInfo?.location["name"]},${weatherInfo?.location["region"]}",
+                S.of(context).name_region(weatherInfo?.location["name"],
+                    weatherInfo?.location["region"]),
                 maxLines: 1,
                 style: const TextStyle(
                     fontSize: 30,
@@ -31,7 +33,8 @@ class LocationView extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                "${weatherInfo?.location["lat"]}, ${weatherInfo?.location["lon"]}",
+                S.of(context).lat_lon(
+                    weatherInfo?.location["lat"], weatherInfo?.location["lon"]),
                 style: const TextStyle(fontSize: 16, color: Colors.white),
               ),
             ],

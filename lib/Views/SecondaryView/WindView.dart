@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherArguments.dart';
+import 'package:weather/generated/l10n.dart';
 
 class WindView extends StatelessWidget {
   final WeatherArguments arguments;
@@ -12,8 +13,8 @@ class WindView extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text("Outros",
+          children: [
+            Text(S.of(context).others,
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
@@ -30,7 +31,9 @@ class WindView extends StatelessWidget {
               children: [
                 const Icon(Icons.air_outlined, color: Colors.white, size: 20),
                 Text(
-                    "Vel: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["avgvis_km"]} km/h ",
+                    S.of(context).wind_speed(
+                        arguments.weatherInfo.forecast["forecastday"]
+                            [arguments.day]["day"]["avgvis_km"]),
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -45,7 +48,8 @@ class WindView extends StatelessWidget {
                 const Icon(Icons.light_mode_outlined,
                     color: Colors.white, size: 20),
                 Text(
-                    "Ind. UV: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["uv"]} ",
+                    S.of(context).ind_uv(arguments.weatherInfo
+                        .forecast["forecastday"][arguments.day]["day"]["uv"]),
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,

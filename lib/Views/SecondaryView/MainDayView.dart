@@ -11,6 +11,7 @@ import 'package:weather/Views/SecondaryView/TemperatureView.dart';
 import 'package:weather/Views/SecondaryView/WindView.dart';
 
 import 'package:intl/intl.dart';
+import 'package:weather/generated/l10n.dart';
 
 class MainDayView extends StatefulWidget {
   const MainDayView({Key? key}) : super(key: key);
@@ -61,7 +62,10 @@ class _MainDayView extends State<MainDayView> {
         LocationView(weatherInfo: arguments.weatherInfo),
         SizedBox(height: height * 0.025),
         Text(
-            "${dayOfWeek}, ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["date"]}",
+            S.of(context).day_date(
+                dayOfWeek!,
+                arguments.weatherInfo.forecast["forecastday"][arguments.day]
+                    ["date"]),
             style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,

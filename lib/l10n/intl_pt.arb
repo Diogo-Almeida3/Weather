@@ -1,4 +1,26 @@
 {
-    "@locale": "pt"
-
+  "@locale": "pt",
+  "condition": "Condição",
+  "precipitation": "Precipitação",
+  "others": "Outros",
+  "humidity": "Humidade: {humidity}%",
+  "prob_rain": "Prob. Chuva: {prob_rain}%",
+  "prob_snow": "Prob. Nevar: {prob_snow}%",
+  "daily_temperature": "{daily_temperature}℃",
+  "humidity_percentage": "{humidity_percentage}%",
+  "day_date": "{dayOfWeek}, {date}",
+  "temperature": "Temperatura",
+  "max_temperature": "Máxima: {max_temperature}℃ ",
+  "min_temperature": "Minima: {min_temperature}℃",
+  "medium_temperature": "Média: {medium_temperature}℃",
+  "wind_speed": "Vel: {wind_speed} km/h ",
+  "ind_uv": "Ind. UV: {uv} ",
+  "name_region": "{name},{region}",
+  "lat_lon": "{lat}, {lon}",
+  "max_min_temp": "{max_temp}℃ / {min_temp}℃",
+  "hour_temperature": "{hour_temperature}℃",
+  "last_Updated": "Ultima Atualização em {last_Updated}",
+  "condition_description": "{condition_description}",
+  "average_temperature": "Temperatura Media {average_temperature}",
+ "current_temperature": "{current_temperature}\u2103"
 }

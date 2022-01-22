@@ -3,6 +3,7 @@ import 'package:weather/Models/WeatherArguments.dart';
 import 'package:weather/Models/WeatherInfo.dart';
 import 'package:intl/intl.dart';
 import 'package:weather/Views/SecondaryView/MainDayView.dart';
+import 'package:weather/generated/l10n.dart';
 
 class DaysSummaryView extends StatelessWidget {
   final WeatherInfo? weatherInfo;
@@ -44,7 +45,10 @@ class DaysSummaryView extends StatelessWidget {
                       weatherInfo?.forecast["forecastday"][day]["day"]
                           ["condition"]["icon"]),
                 )),
-            Text("${maxtemp_c.round()}\u2103 / ${mintemp_c.round()}\u2103",
+            Text(
+                S
+                    .of(context)
+                    .max_min_temp(maxtemp_c.round(), mintemp_c.round()),
                 style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,

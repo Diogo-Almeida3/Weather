@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherArguments.dart';
+import 'package:weather/generated/l10n.dart';
 
 class ConditionView extends StatelessWidget {
   final WeatherArguments arguments;
@@ -13,8 +14,8 @@ class ConditionView extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text("Condição",
+          children: [
+            Text(S.of(context).condition,
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,

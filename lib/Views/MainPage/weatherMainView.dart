@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:weather/Models/WeatherInfo.dart';
+import 'package:weather/Models/background.dart';
 import 'package:weather/Views/MainPage/LastUpdatedView.dart';
 import 'package:weather/Views/MainPage/DaysSummaryView.dart';
 import 'package:weather/Views/MainPage/HourSummaryView.dart';
@@ -47,9 +48,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
     String? json = preferences.getString("Weather");
 
     if (json == null) {
-      setState(() {
-        ctrl = false;
-      });
+      setState(() {});
     } else {
       final Map<String, dynamic> decodedData = jsonDecode(json);
       setState(() {
@@ -103,7 +102,6 @@ class _WeatherMainViewState extends State<WeatherMainView> {
 
           setState(() => {
                 _weatherInfo = WeatherInfo.fromJson(decodedData),
-                ctrl = true,
                 _ctrl1 = true
               });
         }

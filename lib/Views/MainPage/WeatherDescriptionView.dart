@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherInfo.dart';
+import 'package:weather/generated/l10n.dart';
 
 class WeatherDescriptionView extends StatelessWidget {
   final WeatherInfo? weatherInfo;
@@ -10,7 +11,10 @@ class WeatherDescriptionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(weatherInfo?.current["condition"]["text"],
+      child: Text(
+          S
+              .of(context)
+              .condition_description(weatherInfo?.current["condition"]["text"]),
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 30,

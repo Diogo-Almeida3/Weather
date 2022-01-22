@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherInfo.dart';
+import 'package:weather/generated/l10n.dart';
 
 class LastUpdatedView extends StatelessWidget {
   final WeatherInfo? weatherInfo;
@@ -17,7 +18,7 @@ class LastUpdatedView extends StatelessWidget {
           const Icon(Icons.access_time, color: Colors.black45, size: 15),
           const SizedBox(width: 10),
           Text(
-            "Last Updated on ${weatherInfo?.location["localtime"]}",
+            S.of(context).last_Updated(weatherInfo?.location["localtime"]),
             style: const TextStyle(
               fontSize: 18,
               color: Colors.black45,

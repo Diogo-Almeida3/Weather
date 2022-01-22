@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherArguments.dart';
+import 'package:weather/generated/l10n.dart';
 
 class PrecipiationView extends StatelessWidget {
   final WeatherArguments arguments;
@@ -12,9 +13,9 @@ class PrecipiationView extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
-              "Precipitação",
+              S.of(context).precipitation,
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -31,7 +32,9 @@ class PrecipiationView extends StatelessWidget {
               children: [
                 const Icon(Icons.water_outlined, color: Colors.white, size: 20),
                 Text(
-                    "Humidade: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["avghumidity"]}%",
+                    S.of(context).humidity(
+                        arguments.weatherInfo.forecast["forecastday"]
+                            [arguments.day]["day"]["avghumidity"]),
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
@@ -47,7 +50,9 @@ class PrecipiationView extends StatelessWidget {
                 const Icon(Icons.umbrella_outlined,
                     color: Colors.white, size: 20),
                 Text(
-                    "Pro. Chuva: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["daily_chance_of_rain"]}%",
+                    S.of(context).prob_rain(
+                        arguments.weatherInfo.forecast["forecastday"]
+                            [arguments.day]["day"]["daily_chance_of_rain"]),
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -62,7 +67,9 @@ class PrecipiationView extends StatelessWidget {
                 const Icon(Icons.ac_unit_outlined,
                     color: Colors.white, size: 20),
                 Text(
-                    "Pro. Neve: ${arguments.weatherInfo.forecast["forecastday"][arguments.day]["day"]["daily_chance_of_snow"]}%",
+                    S.of(context).prob_snow(
+                        arguments.weatherInfo.forecast["forecastday"]
+                            [arguments.day]["day"]["daily_chance_of_snow"]),
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,

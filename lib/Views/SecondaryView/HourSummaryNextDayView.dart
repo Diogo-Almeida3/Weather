@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/Models/WeatherArguments.dart';
 import 'package:intl/intl.dart';
+import 'package:weather/generated/l10n.dart';
 
 class HourSummaryNextDayView extends StatelessWidget {
   final WeatherArguments arguments;
@@ -32,7 +33,9 @@ class HourSummaryNextDayView extends StatelessWidget {
                       ["condition"]["icon"]),
             )),
         Text(
-            "${arguments.weatherInfo.forecast["forecastday"][arguments.day]["hour"][hour]["temp_c"]}\u2103",
+            S.of(context).daily_temperature(
+                arguments.weatherInfo.forecast["forecastday"][arguments.day]
+                    ["hour"][hour]["temp_c"]),
             style: const TextStyle(
               fontSize: 15,
               color: Colors.white,
@@ -42,7 +45,9 @@ class HourSummaryNextDayView extends StatelessWidget {
           children: [
             const Icon(Icons.water, color: Colors.white, size: 16),
             Text(
-                "${arguments.weatherInfo.forecast["forecastday"][arguments.day]["hour"][hour]["humidity"]}%",
+                S.of(context).humidity_percentage(
+                    arguments.weatherInfo.forecast["forecastday"][arguments.day]
+                        ["hour"][hour]["humidity"]),
                 style: const TextStyle(
                   fontSize: 15,
                   color: Colors.white,
