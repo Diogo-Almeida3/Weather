@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather/Models/BackgroundContainer.dart';
 import 'package:weather/Models/GlassSquare.dart';
 import 'package:weather/Models/WeatherArguments.dart';
 import 'package:weather/Views/LocationView.dart';
@@ -24,10 +25,10 @@ class _MainDayView extends State<MainDayView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      //trocar a cor
-      backgroundColor: Colors.amber,
-      body: MainWidget(context),
-    ));
+            //trocar a cor
+            backgroundColor: Colors.amber,
+            body: backgroundContainer(
+                MainWidget(context), arguments.weatherInfo)));
   }
 
   MaterialColor blueClear = const MaterialColor(
@@ -49,68 +50,64 @@ class _MainDayView extends State<MainDayView> {
   Widget MainWidget(BuildContext context) {
     double height = MediaQuery.of(context).size.height * 0.2;
     double width = MediaQuery.of(context).size.width * 0.425;
-    return Scaffold(
-      backgroundColor: Colors.blue,
-      body: Container(
-          child: Column(
-        children: [
-          const SizedBox(height: 15),
-          LocationView(weatherInfo: arguments.weatherInfo),
-          const SizedBox(height: 15),
-          Text(
-              "${arguments.weatherInfo.forecast["forecastday"][arguments.day]["date"]}",
-              style: const TextStyle(
-                  fontSize: 26,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500)),
-          Expanded(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              children: generateHours(),
-            ),
+    return Column(
+      children: [
+        const SizedBox(height: 15),
+        LocationView(weatherInfo: arguments.weatherInfo),
+        const SizedBox(height: 15),
+        Text(
+            "${arguments.weatherInfo.forecast["forecastday"][arguments.day]["date"]}",
+            style: const TextStyle(
+                fontSize: 26,
+                color: Colors.white,
+                fontWeight: FontWeight.w500)),
+        Expanded(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            children: generateHours(),
           ),
-          const SizedBox(height: 15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GlassSquare(
-                  width: width,
-                  height: height,
-                  child: TemperatureView(
-                    arguments: arguments,
-                  )),
-              GlassSquare(
+        ),
+        const SizedBox(height: 15),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GlassSquare(
                 width: width,
                 height: height,
-                child: ConditionView(
+                child: TemperatureView(
                   arguments: arguments,
-                ),
+                )),
+            GlassSquare(
+              width: width,
+              height: height,
+              child: ConditionView(
+                arguments: arguments,
               ),
-            ],
-          ),
-          const SizedBox(height: 15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GlassSquare(
-                  width: width,
-                  height: height,
-                  child: PrecipiationView(
-                    arguments: arguments,
-                  )),
-              GlassSquare(
-                  width: width,
-                  height: height,
-                  child: WindView(
-                    arguments: arguments,
-                  )),
-            ],
-          ),
-          const SizedBox(height: 15),
-          LastUpdatedView(weatherInfo: arguments.weatherInfo),
-        ],
-      )),
+            ),
+          ],
+        ),
+        const SizedBox(height: 15),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GlassSquare(
+                width: width,
+                height: height,
+                child: PrecipiationView(
+                  arguments: arguments,
+                )),
+            GlassSquare(
+                width: width,
+                height: height,
+                child: WindView(
+                  arguments: arguments,
+                )),
+          ],
+        ),
+        const SizedBox(height: 15),
+        LastUpdatedView(weatherInfo: arguments.weatherInfo),
+      ],
     );
   }
 
