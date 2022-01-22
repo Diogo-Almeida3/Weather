@@ -35,7 +35,7 @@ class PrecipiationView extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                     )),
               ],
             ),
@@ -51,7 +51,7 @@ class PrecipiationView extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
-                        fontWeight: FontWeight.w500)),
+                        fontWeight: FontWeight.w400)),
               ],
             ),
             SizedBox(
@@ -66,7 +66,7 @@ class PrecipiationView extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
-                        fontWeight: FontWeight.w500)),
+                        fontWeight: FontWeight.w400)),
               ],
             ),
           ],

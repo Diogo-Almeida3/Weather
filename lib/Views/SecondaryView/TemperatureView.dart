@@ -35,7 +35,7 @@ class TemperatureView extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
-                        fontWeight: FontWeight.w500)),
+                        fontWeight: FontWeight.w400)),
               ],
             ),
             SizedBox(
@@ -49,7 +49,7 @@ class TemperatureView extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
-                        fontWeight: FontWeight.w500)),
+                        fontWeight: FontWeight.w400)),
               ],
             ),
             SizedBox(
@@ -64,7 +64,7 @@ class TemperatureView extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
-                        fontWeight: FontWeight.w500)),
+                        fontWeight: FontWeight.w400)),
               ],
             ),
           ],

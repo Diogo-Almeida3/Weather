@@ -29,8 +29,9 @@ class ConditionView extends StatelessWidget {
             style: const TextStyle(
                 fontSize: 16,
                 color: Colors.white,
-                fontWeight: FontWeight.w500)),
-        Container(
+                fontWeight: FontWeight.w400)),
+        Transform.scale(
+          scale: 1.25,
           child: Image.network("https:" +
               arguments.weatherInfo.forecast["forecastday"][arguments.day]
                   ["day"]["condition"]["icon"]),

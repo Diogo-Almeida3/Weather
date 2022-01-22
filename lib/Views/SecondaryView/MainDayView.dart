@@ -65,7 +65,7 @@ class _MainDayView extends State<MainDayView> {
             style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,
-                fontWeight: FontWeight.w500)),
+                fontWeight: FontWeight.w400)),
         Expanded(
           child: ListView(
             scrollDirection: Axis.horizontal,
