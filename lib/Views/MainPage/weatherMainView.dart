@@ -83,7 +83,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
               _locationData!.latitude.toString() +
               "," +
               _locationData!.longitude.toString() +
-              '&days=3&aqi=no&alerts=yes';
+              '&days=3&aqi=no&alerts=yes&lang=' + Localizations.localeOf(context).toString();
 
       try {
         http.Response response = await http.get(Uri.parse(_weatherInfoUrl!));
