@@ -260,10 +260,10 @@ class S {
     );
   }
 
-  /// `Average temperature {average_temperature}`
+  /// `Average temperature {average_temperature}℃`
   String average_temperature(Object average_temperature) {
     return Intl.message(
-      'Average temperature $average_temperature',
+      'Average temperature $average_temperature℃',
       name: 'average_temperature',
       desc: '',
       args: [average_temperature],

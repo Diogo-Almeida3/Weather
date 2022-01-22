@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   static String m0(average_temperature) =>
-      "Average temperature ${average_temperature}";
+      "Average temperature ${average_temperature}℃";
 
   static String m1(condition_description) => "${condition_description}";
 

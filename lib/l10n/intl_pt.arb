@@ -19,9 +19,9 @@
   "lat_lon": "{lat}, {lon}",
   "max_min_temp": "{max_temp}℃ / {min_temp}℃",
   "hour_temperature": "{hour_temperature}℃",
-  "last_Updated": "Ultima Atualização em {last_Updated}",
+  "last_Updated": "Última Atualização em {last_Updated}",
   "condition_description": "{condition_description}",
-  "average_temperature": "Temperatura Media {average_temperature}",
+  "average_temperature": "Temperatura Média {average_temperature}℃",
   "current_temperature": "{current_temperature}℃",
   "update_weather": "Informação do tempo"
 }

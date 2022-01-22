@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'pt';
 
   static String m0(average_temperature) =>
-      "Temperatura Media ${average_temperature}";
+      "Temperatura Média ${average_temperature}℃";
 
   static String m1(condition_description) => "${condition_description}";
 
@@ -39,7 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(uv) => "Ind. UV: ${uv} ";
 
-  static String m9(last_Updated) => "Ultima Atualização em ${last_Updated}";
+  static String m9(last_Updated) => "Última Atualização em ${last_Updated}";
 
   static String m10(lat, lon) => "${lat}, ${lon}";
 
