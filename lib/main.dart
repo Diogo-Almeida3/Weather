@@ -4,8 +4,13 @@ import 'package:weather/Views/MainPage/weatherMainView.dart';
 import 'package:weather/Views/SecondaryView/MainDayView.dart';
 
 import 'generated/l10n.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
