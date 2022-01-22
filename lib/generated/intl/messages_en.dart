@@ -83,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "prob_rain": m16,
         "prob_snow": m17,
         "temperature": MessageLookupByLibrary.simpleMessage("Temperature"),
+        "update_weather":
+            MessageLookupByLibrary.simpleMessage("Information weather"),
         "wind_speed": m18
       };
 }

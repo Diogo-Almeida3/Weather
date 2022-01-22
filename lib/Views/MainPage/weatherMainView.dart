@@ -1,6 +1,7 @@
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:weather/Models/Background.dart';
 import 'package:weather/Models/BackgroundContainer.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -14,6 +15,7 @@ import 'package:weather/Views/LocationView.dart';
 import 'package:weather/Views/MainPage/WeatherDescriptionView.dart';
 import 'package:weather/Views/MainPage/weatherSummaryView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather/generated/l10n.dart';
 
 class WeatherMainView extends StatefulWidget {
   const WeatherMainView({Key? key}) : super(key: key);
@@ -118,20 +120,8 @@ class _WeatherMainViewState extends State<WeatherMainView> {
   Widget build(BuildContext context) {
     if (_weatherInfo == null) {
       return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                  onPressed: () async {
-                    await _fetchLocation();
-                    setState(() {});
-                  },
-                  child: const Text("Update Weather"))
-            ],
-          ),
-        ),
-      );
+          backgroundColor: Color.fromRGBO(81, 164, 251, 1),
+          body: WeatherUpdate(context));
     } else {
       return Scaffold(
         body: backgroundContainer(MainWidget(context), _weatherInfo!),
@@ -192,6 +182,35 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         ),
         LastUpdatedView(weatherInfo: _weatherInfo),
       ],
+    );
+  }
+
+  Widget WeatherUpdate(BuildContext) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset(
+            'assets/splash.png',
+            width: MediaQuery.of(context).size.width * 0.5,
+            height: MediaQuery.of(context).size.width * 0.5,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await _fetchLocation();
+              setState(() {});
+            },
+            style: ElevatedButton.styleFrom(
+                primary: Color.fromRGBO(78, 114, 249, 1)),
+            child: Text(S.of(context).update_weather,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                )),
+          )
+        ],
+      ),
     );
   }
 

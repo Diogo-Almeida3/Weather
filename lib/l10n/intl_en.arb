@@ -22,5 +22,6 @@
   "last_Updated": "Last Updated on {last_Updated}",
   "condition_description": "{condition_description}",
   "average_temperature": "Average temperature {average_temperature}",
-  "current_temperature": "{current_temperature}\u2103"
+  "current_temperature": "{current_temperature}℃",
+  "update_weather": "Information weather"
 }

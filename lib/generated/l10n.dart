@@ -279,6 +279,16 @@ class S {
       args: [current_temperature],
     );
   }
+
+  /// `Information weather`
+  String get update_weather {
+    return Intl.message(
+      'Information weather',
+      name: 'update_weather',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
