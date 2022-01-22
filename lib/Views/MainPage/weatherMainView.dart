@@ -30,6 +30,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
   PermissionStatus _permissionStatus = PermissionStatus.denied;
   LocationData? _locationData;
   String? _weatherInfoUrl;
+  bool ctrl = true, _ctrl1 = true;
 
   @override
   void initState() {
@@ -46,7 +47,9 @@ class _WeatherMainViewState extends State<WeatherMainView> {
     String? json = preferences.getString("Weather");
 
     if (json == null) {
-      setState(() {});
+      setState(() {
+        ctrl = false;
+      });
     } else {
       final Map<String, dynamic> decodedData = jsonDecode(json);
       setState(() {
@@ -98,7 +101,11 @@ class _WeatherMainViewState extends State<WeatherMainView> {
               jsonEncode(WeatherInfo.fromJson(decodedData));
           preferences.setString("Weather", sharedPreferencesData);
 
-          setState(() => _weatherInfo = WeatherInfo.fromJson(decodedData));
+          setState(() => {
+                _weatherInfo = WeatherInfo.fromJson(decodedData),
+                ctrl = true,
+                _ctrl1 = true
+              });
         }
       } catch (ex) {
         debugPrint('Something went wrong: $ex');
@@ -134,6 +141,11 @@ class _WeatherMainViewState extends State<WeatherMainView> {
     }
   }
 
+  double turns = 0.0;
+  void _changeRotation() {
+    setState(() => turns += 3.14 * 2);
+  }
+
   Widget MainWidget(BuildContext context) {
     return Column(
       children: [
@@ -142,7 +154,34 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         const SizedBox(height: 5),
         WeatherSummary(weatherInfo: _weatherInfo),
         const SizedBox(height: 5),
-        WeatherDescriptionView(weatherInfo: _weatherInfo),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            WeatherDescriptionView(weatherInfo: _weatherInfo),
+            const SizedBox(width: 15),
+            ElevatedButton(
+              onPressed: () => {
+                _changeRotation(),
+                setState(() {
+                  _ctrl1 = !_ctrl1;
+                }),
+                _fetchLocation()
+              },
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
+              child: AnimatedRotation(
+                  turns: turns,
+                  duration: const Duration(seconds: 1),
+                  child: const Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                    size: 32,
+                  )),
+            ),
+          ],
+        ),
         Expanded(
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -153,7 +192,7 @@ class _WeatherMainViewState extends State<WeatherMainView> {
         Wrap(
           children: generateDays(),
         ),
-        LastUpdatedView(weatherInfo: _weatherInfo)
+        LastUpdatedView(weatherInfo: _weatherInfo),
       ],
     );
   }
@@ -162,9 +201,15 @@ class _WeatherMainViewState extends State<WeatherMainView> {
     List<Widget> _days = List<Widget>.empty(growable: true);
     for (int i = 0; i < 3; i++) {
       _days.add(
-        DaysSummaryView(
-          weatherInfo: _weatherInfo,
-          day: i,
+        AnimatedContainer(
+          width: MediaQuery.of(context).size.width,
+          height: _ctrl1 ? MediaQuery.of(context).size.height * 0.085 : 0,
+          curve: Curves.ease,
+          duration: const Duration(seconds: 1),
+          child: DaysSummaryView(
+            weatherInfo: _weatherInfo,
+            day: i,
+          ),
         ),
       );
     }
@@ -220,14 +265,14 @@ class _WeatherMainViewState extends State<WeatherMainView> {
     const MaterialColor night = MaterialColor(
       0xFFFFFFFF,
       <int, Color>{
-        50: Color(0xFF242F5F),
-        100: Color(0xFF242F5F),
-        200: Color(0xFF242F5F),
-        300: Color(0xFF242F5F),
-        400: Color(0xFF242F5F),
-        500: Color(0xFF242F5F),
-        600: Color(0xFF242F5F),
-        700: Color(0xFF242F5F),
+        50: Color(0xFF4559b3),
+        100: Color(0xFF4559b3),
+        200: Color(0xFF4052a5),
+        300: Color(0xFF4052a5),
+        400: Color(0xFF3a4b97),
+        500: Color(0xFF3a4b97),
+        600: Color(0xFF2f3d7b),
+        700: Color(0xFF2f3d7b),
         800: Color(0xFF242F5F),
         900: Color(0xFF242F5F),
       },
@@ -236,16 +281,16 @@ class _WeatherMainViewState extends State<WeatherMainView> {
     const MaterialColor blueClear = MaterialColor(
       0xFFFFFFFF,
       <int, Color>{
-        50: Color(0xFF42A5F5),
-        100: Color(0xFF64B5F6),
-        200: Color(0xFF64B5F6),
-        300: Color(0xFF64B5F6),
-        400: Color(0xFF90CAF9),
-        500: Color(0xFF90CAF9),
-        600: Color(0xFF90CAF9),
-        700: Color(0xFFBBDEFB),
-        800: Color(0xFFBBDEFB),
-        900: Color(0xFFBBDEFB),
+        50: Color(0xFF42AF5F),
+        100: Color(0xFF42AF5F),
+        200: Color(0xFF2196F3),
+        300: Color(0xFF2196F3),
+        400: Color(0xFF1E88E5),
+        500: Color(0xFF1E88E5),
+        600: Color(0xFF1976D2),
+        700: Color(0xFF1976D2),
+        800: Color(0xFF1565C0),
+        900: Color(0xFF1565C0),
       },
     );
 

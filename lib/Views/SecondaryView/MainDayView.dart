@@ -81,11 +81,12 @@ class _MainDayView extends State<MainDayView> {
                     arguments: arguments,
                   )),
               GlassSquare(
-                  width: width,
-                  height: height,
-                  child: ConditionView(
-                    arguments: arguments,
-                  )),
+                width: width,
+                height: height,
+                child: ConditionView(
+                  arguments: arguments,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 15),

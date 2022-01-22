@@ -17,9 +17,11 @@ class GlassSquare extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.0),
-      child: Container(
+      child: AnimatedContainer(
         width: width,
         height: height,
+        duration: const Duration(seconds: 3),
+        curve: Curves.fastOutSlowIn,
         child: Stack(
           children: [
             BackdropFilter(
