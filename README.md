@@ -3,7 +3,7 @@
 * [Technologies](#technologies)
 
 ## General info
-This work was carried out in the scope of the mobile architectures Unit, aiming to implement a weather application.
+This work was carried out in the scope of the mobile architectures course Unit, aiming to implement a weather application.
 
 	
 ## Technologies
